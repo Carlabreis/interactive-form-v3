@@ -5,6 +5,7 @@ const jobRoleSelect = document.querySelector("#title");
 const colorSelect = document.querySelector("#color");
 const designSelect = document.querySelector("#design");
 const activitiesSet = document.querySelector("#activities");
+const activitiesBox = document.querySelector("#activities-box");
 const total = document.querySelector("#activities-cost");
 const creditCardinfo = document.querySelector("#credit-card");
 const paypalInfo = document.querySelector("#paypal");
@@ -91,45 +92,45 @@ paymentType.addEventListener("change", (e) => {
   }
 });
 
-// 7- FORM VALIDATION
+// 7/9- FORM VALIDATION
 form.addEventListener("submit", (e) => {
   const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
   const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
-  const registerActivitiesValid = () => (totalPrice !== 0 ? true : false);
+  const isActivitiesValid = () => (totalPrice !== 0 ? true : false);
   const isCardValid = () => /\b\d{13,16}\b/.test(ccNum.value);
   const isZipCodeValid = () => /^\d{5}$/.test(zipCode.value);
   const isCvvValid = () => /^\d{3}$/.test(cvv.value);
 
+  function validation(element, validator) {
+    if (validator) {
+      element.parentElement.classList.add("valid");
+      element.parentElement.classList.remove("not-valid");
+      element.nextElementSibling.style.display = "none";
+    } else {
+      e.preventDefault();
+      element.parentElement.classList.remove("valid");
+      element.parentElement.classList.add("not-valid");
+      element.nextElementSibling.style.display = "block";
+    }
+  };
+
+  validation(userName, isNameValid());
+  validation(userEmail, isEmailValid());
+  validation(activitiesBox, isActivitiesValid());
   if (paymentType.value === "credit-card") {
-    if (
-      isNameValid() &&
-      isEmailValid() &&
-      registerActivitiesValid() &&
-      isCardValid() &&
-      isZipCodeValid() &&
-      isCvvValid()
-    ) {
-      return true;
-    } else {
-      e.preventDefault();
-    }
-  } else {
-    if (isNameValid() && isEmailValid() && registerActivitiesValid()) {
-      return true;
-    } else {
-      e.preventDefault();
-    }
+    validation(ccNum, isCardValid());
+    validation(zipCode, isZipCodeValid());
+    validation(cvv, isCvvValid());
   }
 });
 
 // 8- THE ACTIVITIES SECTION
-checkboxInputs.forEach(element => {
-    element.addEventListener("blur", (e) => {
-        element.parentElement.classList.add("blur");
-        element.parentElement.classList.remove("focus");
-    })
-    element.addEventListener("focus", (e) => {
-        element.parentElement.classList.add("focus");
-    })
+checkboxInputs.forEach((element) => {
+  element.addEventListener("blur", (e) => {
+    element.parentElement.classList.add("blur");
+    element.parentElement.classList.remove("focus");
+  });
+  element.addEventListener("focus", (e) => {
+    element.parentElement.classList.add("focus");
+  });
 });
-
