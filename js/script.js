@@ -14,6 +14,7 @@ const form = document.querySelector("form");
 const ccNum = document.querySelector("#cc-num");
 const zipCode = document.querySelector("#zip");
 const cvv = document.querySelector("#cvv");
+const checkboxInputs = activitiesSet.querySelectorAll("input[type='checkbox']");
 
 userName.focus();
 otherJobRole.style.display = "none";
@@ -120,3 +121,15 @@ form.addEventListener("submit", (e) => {
     }
   }
 });
+
+// 8- THE ACTIVITIES SECTION
+checkboxInputs.forEach(element => {
+    element.addEventListener("blur", (e) => {
+        element.parentElement.classList.add("blur");
+        element.parentElement.classList.remove("focus");
+    })
+    element.addEventListener("focus", (e) => {
+        element.parentElement.classList.add("focus");
+    })
+});
+
