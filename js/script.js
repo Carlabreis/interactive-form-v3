@@ -3,6 +3,8 @@ const otherJobRole = document.querySelector("#other-job-role");
 const jobRoleSelect = document.querySelector("#title");
 const colorSelect = document.querySelector("#color");
 const designSelect = document.querySelector("#design");
+const activitiesSet = document.querySelector("#activities");
+const total = document.querySelector("#activities-cost");
 
 userName.focus();
 otherJobRole.style.display = 'none';
@@ -15,6 +17,7 @@ jobRoleSelect.addEventListener("change", (e) => {
     }
 });
 
+// 4- T-SHIRT INFO SECTION
 //disable color select element
 colorSelect.disabled = true;
 
@@ -41,5 +44,16 @@ designSelect.addEventListener("change", (e) => {
             jsPunsOptions[i].setAttribute("hidden", "");
         }
     }
+});
+
+// 5- ACTIVITIES SECTION
+let totalPrice = 0;
+activitiesSet.addEventListener("change", (e) => {
+    if (e.target.checked) {
+        totalPrice = totalPrice + parseInt(e.target.dataset.cost);
+    } else {
+        totalPrice = totalPrice - parseInt(e.target.dataset.cost);
+    }
+    total.innerText = `Total: $${totalPrice}`;
 });
 
