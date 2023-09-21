@@ -25,6 +25,7 @@ designSelect.addEventListener("change", (e) => {
     colorSelect.disabled = false;
 
     if (e.target.value === "js puns") {
+        colorSelect[0].selected = "true";
         for (let i = 0; i < heartJsOptions.length; i++) {
             heartJsOptions[i].setAttribute("hidden", "");
         }
@@ -32,6 +33,7 @@ designSelect.addEventListener("change", (e) => {
             jsPunsOptions[i].removeAttribute("hidden", "");
         }
     } else {
+        colorSelect[0].selected = "true";
         for (let i = 0; i < heartJsOptions.length; i++) {
             heartJsOptions[i].removeAttribute("hidden", "");
         }
