@@ -91,7 +91,6 @@ paymentType.addEventListener("change", (e) => {
 });
 
 // 7- FORM VALIDATION
-
 form.addEventListener("submit", (e) => {
   const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
   const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
@@ -111,14 +110,13 @@ form.addEventListener("submit", (e) => {
     ) {
       return true;
     } else {
-      return false;
+      e.preventDefault();
     }
   } else {
     if (isNameValid() && isEmailValid() && registerActivitiesValid()) {
-      true;
+      return true;
     } else {
-      return false;
+      e.preventDefault();
     }
   }
-  e.preventDefault();
 });
