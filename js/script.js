@@ -5,6 +5,10 @@ const colorSelect = document.querySelector("#color");
 const designSelect = document.querySelector("#design");
 const activitiesSet = document.querySelector("#activities");
 const total = document.querySelector("#activities-cost");
+const creditCardinfo = document.querySelector("#credit-card");
+const paypalInfo = document.querySelector("#paypal");
+const bitcoinInfo = document.querySelector("#bitcoin");
+const paymentType = document.querySelector("#payment");
 
 userName.focus();
 otherJobRole.style.display = 'none';
@@ -48,6 +52,7 @@ designSelect.addEventListener("change", (e) => {
 
 // 5- ACTIVITIES SECTION
 let totalPrice = 0;
+
 activitiesSet.addEventListener("change", (e) => {
     if (e.target.checked) {
         totalPrice = totalPrice + parseInt(e.target.dataset.cost);
@@ -56,4 +61,26 @@ activitiesSet.addEventListener("change", (e) => {
     }
     total.innerText = `Total: $${totalPrice}`;
 });
+
+// 6- PAYMENT INFO SECTION
+paymentType.querySelector('[value="credit-card"]').selected = true;
+paypalInfo.style.display = 'none';
+bitcoinInfo.style.display = 'none';
+
+paymentType.addEventListener("change", (e) => {
+    if (paymentType.querySelector('[value="credit-card"]').selected) {
+        creditCardinfo.style.display = 'block';
+        paypalInfo.style.display = 'none';
+        bitcoinInfo.style.display = 'none';
+    } else if (paymentType.querySelector('[value="paypal"]').selected) {
+        paypalInfo.style.display = 'block';
+        bitcoinInfo.style.display = 'none';
+        creditCardinfo.style.display = 'none';
+    } else {
+        bitcoinInfo.style.display = 'block';
+        paypalInfo.style.display = 'none';
+        creditCardinfo.style.display = 'none';
+    }
+});
+
 
