@@ -149,7 +149,14 @@ const isCvvValid = () => /^\d{3}$/.test(cvv.value);
    if not, it prevents form submission and add visual hints to show where to fix/add info
   */
 function validation(element, validator) {
-  if (validator) {
+  const hints = document.querySelectorAll(".hint");
+
+  if (element.value === "") {
+    element.parentElement.classList.remove("valid");
+    element.parentElement.classList.add("not-valid");
+    element.parentElement.lastElementChild.innerText = "This field can not be empty";
+    element.parentElement.lastElementChild.style.display = "block";
+  } else if (validator) {
     element.parentElement.classList.add("valid");
     element.parentElement.classList.remove("not-valid");
     element.nextElementSibling.style.display = "none";
@@ -186,7 +193,6 @@ cvv.addEventListener("keyup", () => {
 });
 
 form.addEventListener("submit", (e) => {
-  // call validation function for all mandatory inputs
   validation(userName, isNameValid());
   validation(userEmail, isEmailValid());
   validation(activitiesBox, isActivitiesValid());

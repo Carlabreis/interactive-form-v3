@@ -48,7 +48,7 @@ HTML, CSS and JavaScript
 - [x] Extra credit
     - [x] conflicting activity times
     - [x] real-time error messages
-        - [ ] detail this specific feature in README.md file
+        - [x] detail this specific feature in README.md file
     - [ ] conditional error message
         - [ ] detail this specific feature in README.md file
 
@@ -59,7 +59,8 @@ HTML, CSS and JavaScript
 ## Features
 
 ### real-time error messages
-
+With this feature we get instant validation and error message for the requires input fields (marked with the * ) if the user enters invalid input.
+For example, if they enter the credit card number and type one extra number, they will get an error message right away. And by the deletion of the extra number the error will disapear and the green symbol will show instead to indicate it is a valid input.
 
 ### conditional error messages
 
