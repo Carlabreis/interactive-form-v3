@@ -100,7 +100,7 @@ activitiesSet.addEventListener("change", (event) => {
 
     totalPrice = totalPrice - targetPrice;
   }
-  
+
   total.innerText = `Total: $${totalPrice}`;
 });
 
@@ -114,7 +114,6 @@ checkboxInputs.forEach((element) => {
     element.parentElement.classList.add("focus");
   });
 });
-
 
 // PAYMENT INFO SECTION
 
@@ -137,32 +136,56 @@ paymentType.addEventListener("change", (e) => {
 
 // FORM SUBMIT/VALIDATION
 
-form.addEventListener("submit", (e) => {
-  // test if user's inputs are valid
-  const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
-  const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
-  const isActivitiesValid = () => (totalPrice !== 0 ? true : false);
-  const isCardValid = () => /\b\d{13,16}\b/.test(ccNum.value);
-  const isZipCodeValid = () => /^\d{5}$/.test(zipCode.value);
-  const isCvvValid = () => /^\d{3}$/.test(cvv.value);
+// test if user's inputs are valid
+const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
+const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
+const isActivitiesValid = () => (totalPrice !== 0 ? true : false);
+const isCardValid = () => /\b\d{13,16}\b/.test(ccNum.value);
+const isZipCodeValid = () => /^\d{5}$/.test(zipCode.value);
+const isCvvValid = () => /^\d{3}$/.test(cvv.value);
 
-  /*
+/*
    if input is valid submits and add visual hints that it was valid,
    if not, it prevents form submission and add visual hints to show where to fix/add info
   */
-  function validation(element, validator) {
-    if (validator) {
-      element.parentElement.classList.add("valid");
-      element.parentElement.classList.remove("not-valid");
-      element.nextElementSibling.style.display = "none";
-    } else {
-      e.preventDefault();
-      element.parentElement.classList.remove("valid");
-      element.parentElement.classList.add("not-valid");
-      element.nextElementSibling.style.display = "block";
-    }
+function validation(element, validator) {
+  if (validator) {
+    element.parentElement.classList.add("valid");
+    element.parentElement.classList.remove("not-valid");
+    element.nextElementSibling.style.display = "none";
+  } else {
+    // e.preventDefault();
+    element.parentElement.classList.remove("valid");
+    element.parentElement.classList.add("not-valid");
+    element.nextElementSibling.style.display = "block";
   }
+}
 
+userName.addEventListener("keyup", () => {
+  validation(userName, isNameValid());
+});
+
+userEmail.addEventListener("keyup", () => {
+  validation(userEmail, isEmailValid());
+});
+
+activitiesBox.addEventListener("keyup", () => {
+  validation(activitiesBox, isActivitiesValid());
+});
+
+ccNum.addEventListener("keyup", () => {
+  validation(ccNum, isCardValid());
+});
+
+zipCode.addEventListener("keyup", () => {
+  validation(zipCode, isZipCodeValid());
+});
+
+cvv.addEventListener("keyup", () => {
+  validation(cvv, isCvvValid());
+});
+
+form.addEventListener("submit", (e) => {
   // call validation function for all mandatory inputs
   validation(userName, isNameValid());
   validation(userEmail, isEmailValid());
@@ -172,4 +195,5 @@ form.addEventListener("submit", (e) => {
     validation(zipCode, isZipCodeValid());
     validation(cvv, isCvvValid());
   }
+  e.preventDefault();
 });
