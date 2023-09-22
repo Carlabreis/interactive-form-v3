@@ -149,22 +149,20 @@ const isCvvValid = () => /^\d{3}$/.test(cvv.value);
    if not, it prevents form submission and add visual hints to show where to fix/add info
   */
 function validation(element, validator) {
-  const hints = document.querySelectorAll(".hint");
-
-  if (element.value === "") {
+  if (validator) {
+    element.parentElement.classList.add("valid");
+    element.parentElement.classList.remove("not-valid");
+    element.parentElement.lastElementChild.style.display = "none";
+  } else if (!validator) {
+    // e.preventDefault();
+    element.parentElement.classList.remove("valid");
+    element.parentElement.classList.add("not-valid");
+    element.parentElement.lastElementChild.style.display = "block";
+  } else if (element.value === "") {
     element.parentElement.classList.remove("valid");
     element.parentElement.classList.add("not-valid");
     element.parentElement.lastElementChild.innerText = "This field can not be empty";
     element.parentElement.lastElementChild.style.display = "block";
-  } else if (validator) {
-    element.parentElement.classList.add("valid");
-    element.parentElement.classList.remove("not-valid");
-    element.nextElementSibling.style.display = "none";
-  } else {
-    // e.preventDefault();
-    element.parentElement.classList.remove("valid");
-    element.parentElement.classList.add("not-valid");
-    element.nextElementSibling.style.display = "block";
   }
 }
 
@@ -176,7 +174,7 @@ userEmail.addEventListener("keyup", () => {
   validation(userEmail, isEmailValid());
 });
 
-activitiesBox.addEventListener("keyup", () => {
+activitiesBox.addEventListener("change", () => {
   validation(activitiesBox, isActivitiesValid());
 });
 
