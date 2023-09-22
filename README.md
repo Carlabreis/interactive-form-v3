@@ -21,7 +21,7 @@ Using the supplied HTML and CSS files, I added JavaScript to make the form more 
 <!-- BUILT WITH -->
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+HTML, CSS and JavaScript
 
 <p align="center"> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a></p>
 
@@ -48,9 +48,9 @@ This section should list any major frameworks/libraries used to bootstrap your p
 - [x] Extra credit
     - [x] conflicting activity times
     - [x] real-time error messages
-        - [] detail this specific feature in README.md file
-    - [] conditional error message
-        - [] detail this specific feature in README.md file
+        - [ ] detail this specific feature in README.md file
+    - [ ] conditional error message
+        - [ ] detail this specific feature in README.md file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
