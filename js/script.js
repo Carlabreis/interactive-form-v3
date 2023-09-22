@@ -1,24 +1,36 @@
+const form = document.querySelector("form");
+
 const userName = document.querySelector("#name");
 const userEmail = document.querySelector("#email");
-const otherJobRole = document.querySelector("#other-job-role");
 const jobRoleSelect = document.querySelector("#title");
+const otherJobRole = document.querySelector("#other-job-role");
+
 const colorSelect = document.querySelector("#color");
 const designSelect = document.querySelector("#design");
+
 const activitiesSet = document.querySelector("#activities");
 const activitiesBox = document.querySelector("#activities-box");
+const checkboxInputs = activitiesSet.querySelectorAll("input[type='checkbox']");
 const total = document.querySelector("#activities-cost");
+
+const paymentType = document.querySelector("#payment");
 const creditCardinfo = document.querySelector("#credit-card");
 const paypalInfo = document.querySelector("#paypal");
 const bitcoinInfo = document.querySelector("#bitcoin");
-const paymentType = document.querySelector("#payment");
-const form = document.querySelector("form");
 const ccNum = document.querySelector("#cc-num");
 const zipCode = document.querySelector("#zip");
 const cvv = document.querySelector("#cvv");
-const checkboxInputs = activitiesSet.querySelectorAll("input[type='checkbox']");
 
-userName.focus();
-otherJobRole.style.display = "none";
+document.addEventListener("DOMContentLoaded", () => {
+  userName.focus();
+  otherJobRole.style.display = "none";
+  colorSelect.disabled = true;
+  paymentType.querySelector('[value="credit-card"]').selected = true;
+  paypalInfo.style.display = "none";
+  bitcoinInfo.style.display = "none";
+});
+
+// Job Role extra input field for 'other' option
 
 jobRoleSelect.addEventListener("change", (e) => {
   if (e.target.value === "other") {
@@ -28,9 +40,7 @@ jobRoleSelect.addEventListener("change", (e) => {
   }
 });
 
-// 4- T-SHIRT INFO SECTION
-//disable color select element
-colorSelect.disabled = true;
+// T-SHIRT INFO SECTION
 
 designSelect.addEventListener("change", (e) => {
   const heartJsOptions = colorSelect.querySelectorAll(
@@ -40,6 +50,7 @@ designSelect.addEventListener("change", (e) => {
 
   colorSelect.disabled = false;
 
+  // only shows the color options available for the selected design
   if (e.target.value === "js puns") {
     colorSelect[0].selected = "true";
     for (let i = 0; i < heartJsOptions.length; i++) {
@@ -59,24 +70,56 @@ designSelect.addEventListener("change", (e) => {
   }
 });
 
-// 5- ACTIVITIES SECTION
+// ACTIVITIES SECTION
 let totalPrice = 0;
 
-activitiesSet.addEventListener("change", (e) => {
-  if (e.target.checked) {
-    totalPrice = totalPrice + parseInt(e.target.dataset.cost);
+activitiesSet.addEventListener("change", (event) => {
+  const targetPrice = parseInt(event.target.dataset.cost);
+  const targetTime = event.target.dataset.dayAndTime;
+
+  if (event.target.checked) {
+    checkboxInputs.forEach((element) => {
+      const dataTime = element.dataset.dayAndTime;
+
+      if (dataTime === targetTime && event.target !== element) {
+        element.disabled = true;
+        element.parentElement.classList.add("disabled");
+      }
+    });
+
+    totalPrice = totalPrice + targetPrice;
   } else {
-    totalPrice = totalPrice - parseInt(e.target.dataset.cost);
+    checkboxInputs.forEach((element) => {
+      const dataTime = element.dataset.dayAndTime;
+
+      if (dataTime === targetTime && event.target !== element) {
+        element.disabled = false;
+        element.parentElement.classList.remove("disabled");
+      }
+    });
+
+    totalPrice = totalPrice - targetPrice;
   }
+  
   total.innerText = `Total: $${totalPrice}`;
 });
 
-// 6- PAYMENT INFO SECTION
-paymentType.querySelector('[value="credit-card"]').selected = true;
-paypalInfo.style.display = "none";
-bitcoinInfo.style.display = "none";
+checkboxInputs.forEach((element) => {
+  element.addEventListener("blur", () => {
+    element.parentElement.classList.add("blur");
+    element.parentElement.classList.remove("focus");
+  });
+
+  element.addEventListener("focus", () => {
+    element.parentElement.classList.add("focus");
+  });
+});
+
+
+// PAYMENT INFO SECTION
 
 paymentType.addEventListener("change", (e) => {
+  // it displays the correspondent inputs, according to what was selected on payment type input
   if (paymentType.querySelector('[value="credit-card"]').selected) {
     creditCardinfo.style.display = "block";
     paypalInfo.style.display = "none";
@@ -92,8 +135,10 @@ paymentType.addEventListener("change", (e) => {
   }
 });
 
-// 7/9- FORM VALIDATION
+// FORM SUBMIT/VALIDATION
+
 form.addEventListener("submit", (e) => {
+  // test if user's inputs are valid
   const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
   const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
   const isActivitiesValid = () => (totalPrice !== 0 ? true : false);
@@ -101,6 +146,10 @@ form.addEventListener("submit", (e) => {
   const isZipCodeValid = () => /^\d{5}$/.test(zipCode.value);
   const isCvvValid = () => /^\d{3}$/.test(cvv.value);
 
+  /*
+   if input is valid submits and add visual hints that it was valid,
+   if not, it prevents form submission and add visual hints to show where to fix/add info
+  */
   function validation(element, validator) {
     if (validator) {
       element.parentElement.classList.add("valid");
@@ -112,8 +161,9 @@ form.addEventListener("submit", (e) => {
       element.parentElement.classList.add("not-valid");
       element.nextElementSibling.style.display = "block";
     }
-  };
+  }
 
+  // call validation function for all mandatory inputs
   validation(userName, isNameValid());
   validation(userEmail, isEmailValid());
   validation(activitiesBox, isActivitiesValid());
@@ -122,15 +172,4 @@ form.addEventListener("submit", (e) => {
     validation(zipCode, isZipCodeValid());
     validation(cvv, isCvvValid());
   }
-});
-
-// 8- THE ACTIVITIES SECTION
-checkboxInputs.forEach((element) => {
-  element.addEventListener("blur", (e) => {
-    element.parentElement.classList.add("blur");
-    element.parentElement.classList.remove("focus");
-  });
-  element.addEventListener("focus", (e) => {
-    element.parentElement.classList.add("focus");
-  });
 });
