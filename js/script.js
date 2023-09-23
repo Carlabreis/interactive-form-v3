@@ -102,6 +102,7 @@ activitiesSet.addEventListener("change", (event) => {
   }
 
   total.innerText = `Total: $${totalPrice}`;
+  validation(activitiesBox, isActivitiesValid());
 });
 
 checkboxInputs.forEach((element) => {
@@ -139,10 +140,14 @@ paymentType.addEventListener("change", (e) => {
 // test if user's inputs are valid
 const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
 const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
-const isActivitiesValid = () => (totalPrice !== 0 ? true : false);
 const isCardValid = () => /\b\d{13,16}\b/.test(ccNum.value);
 const isZipCodeValid = () => /^\d{5}$/.test(zipCode.value);
 const isCvvValid = () => /^\d{3}$/.test(cvv.value);
+function isActivitiesValid() {
+  if (totalPrice !== 0) {
+    return true;
+  }
+};
 
 /*
    if input is valid submits and add visual hints that it was valid,
@@ -154,15 +159,12 @@ function validation(element, validator) {
     element.parentElement.classList.remove("not-valid");
     element.parentElement.lastElementChild.style.display = "none";
   } else if (!validator) {
-    // e.preventDefault();
     element.parentElement.classList.remove("valid");
     element.parentElement.classList.add("not-valid");
     element.parentElement.lastElementChild.style.display = "block";
-  } else if (element.value === "") {
-    element.parentElement.classList.remove("valid");
-    element.parentElement.classList.add("not-valid");
+  }
+  if (element.value === "") {
     element.parentElement.lastElementChild.innerText = "This field can not be empty";
-    element.parentElement.lastElementChild.style.display = "block";
   }
 }
 
@@ -171,11 +173,12 @@ userName.addEventListener("keyup", () => {
 });
 
 userEmail.addEventListener("keyup", () => {
-  validation(userEmail, isEmailValid());
-});
+  const isValid = isEmailValid();
+  validation(userEmail, isValid);
 
-activitiesBox.addEventListener("change", () => {
-  validation(activitiesBox, isActivitiesValid());
+  if (!isValid && userEmail.value !== "") {
+    userEmail.parentElement.lastElementChild.innerText = "Email address must be formatted correctly";
+  }
 });
 
 ccNum.addEventListener("keyup", () => {
