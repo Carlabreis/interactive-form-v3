@@ -150,9 +150,9 @@ function isActivitiesValid() {
 };
 
 /*
-   if input is valid submits and add visual hints that it was valid,
-   if not, it prevents form submission and add visual hints to show where to fix/add info
-  */
+  if input is valid submits and add visual hints that it was valid,
+  if not, it prevents form submission and add visual hints to show where to fix/add info
+*/
 function validation(element, validator) {
   if (validator) {
     element.parentElement.classList.add("valid");
@@ -182,16 +182,33 @@ userEmail.addEventListener("keyup", () => {
 });
 
 ccNum.addEventListener("keyup", () => {
-  validation(ccNum, isCardValid());
+  const isValid = isCardValid();
+  validation(ccNum, isValid);
+
+  if (!isValid && ccNum.value !== "") {
+    ccNum.parentElement.lastElementChild.innerText = "Credit card number must be between 13 - 16 digits";
+  }
 });
 
 zipCode.addEventListener("keyup", () => {
-  validation(zipCode, isZipCodeValid());
+  const isValid = isZipCodeValid();
+  validation(zipCode, isValid);
+
+  if (!isValid && zipCode.value !== "") {
+    zipCode.parentElement.lastElementChild.innerText = "Zip Code must be 5 digits";
+  }
 });
 
 cvv.addEventListener("keyup", () => {
-  validation(cvv, isCvvValid());
+  const isValid = isCvvValid();
+  validation(cvv, isValid);
+
+  if (!isValid && cvv.value !== "") {
+    cvv.parentElement.lastElementChild.innerText = "CVV must be 3 digits";
+  }
 });
+
+
 
 form.addEventListener("submit", (e) => {
   validation(userName, isNameValid());
