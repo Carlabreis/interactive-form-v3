@@ -1,6 +1,7 @@
 # interactive-form-v3
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 ![Product screenshot](<Screenshot 2023-09-22 at 1.39.50 PM.png>)
@@ -11,14 +12,13 @@ In this project I used JavaScript to enhance an interactive regfistration form f
 
 Using the supplied HTML and CSS files, I added JavaScript to make the form more user-friendly by:
 
-* Adding customized and conditional behavior and interactivity;
-* Validating user input and providing helpful error messages when the user enters invalid information into the form fields.
-
+- Adding customized and conditional behavior and interactivity;
+- Validating user input and providing helpful error messages when the user enters invalid information into the form fields.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- BUILT WITH -->
+
 ### Built With
 
 HTML, CSS and JavaScript
@@ -27,8 +27,8 @@ HTML, CSS and JavaScript
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [x] Getting started with the project files
@@ -41,26 +41,29 @@ HTML, CSS and JavaScript
 - [x] The activities section
 - [x] Visual validation errors
 - [x] Finish the project
-    - [x] code comments
-    - [x] code readability
-    - [x] quality assurance testing
-    - [x] cross browser consistency
+  - [x] code comments
+  - [x] code readability
+  - [x] quality assurance testing
+  - [x] cross browser consistency
 - [x] Extra credit
-    - [x] conflicting activity times
-    - [x] real-time error messages
-        - [x] detail this specific feature in README.md file
-    - [ ] conditional error message
-        - [ ] detail this specific feature in README.md file
+  - [x] conflicting activity times
+  - [x] real-time error messages
+    - [x] detail this specific feature in README.md file
+  - [x] conditional error message
+    - [x] detail this specific feature in README.md file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <!-- FEATURES -->
+
 ## Features
 
 ### real-time error messages
-With this feature we get instant validation and error message for the requires input fields (marked with the * ) if the user enters invalid input.
+
+With this feature we get instant validation and error message for the requires input fields (marked with the \* ) if the user enters invalid input.
 For example, if they enter the credit card number and type one extra number, they will get an error message right away. And by the deletion of the extra number the error will disapear and the green symbol will show instead to indicate it is a valid input.
 
 ### conditional error messages
 
+This feature displays error messages with more information about what is wrong.
+For example, if the email address field is empty, inform the user that they should add an email address. But if they’ve already added an email address, but formatted it incorrectly, that message inform the user that the email format is invalid.

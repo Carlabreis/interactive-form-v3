@@ -1,3 +1,6 @@
+/*
+  FORM ELEMENTS
+*/
 const form = document.querySelector("form");
 
 const userName = document.querySelector("#name");
@@ -21,6 +24,43 @@ const ccNum = document.querySelector("#cc-num");
 const zipCode = document.querySelector("#zip");
 const cvv = document.querySelector("#cvv");
 
+/*
+  REQUIRED FIELDS VALIDATION FUNCTIONS
+*/
+const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
+const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
+const isCardValid = () => /\b\d{13,16}\b/.test(ccNum.value);
+const isZipCodeValid = () => /^\d{5}$/.test(zipCode.value);
+const isCvvValid = () => /^\d{3}$/.test(cvv.value);
+function isActivitiesValid() {
+  if (totalPrice !== 0) {
+    return true;
+  }
+}
+
+/*
+  if input is valid adds visual hints that it was valid,
+  if not, it adds visual hints to show where to fix/add info
+*/
+function validation(element, validator) {
+  if (validator) {
+    element.parentElement.classList.add("valid");
+    element.parentElement.classList.remove("not-valid");
+    element.parentElement.lastElementChild.style.display = "none";
+  } else if (!validator) {
+    element.parentElement.classList.remove("valid");
+    element.parentElement.classList.add("not-valid");
+    element.parentElement.lastElementChild.style.display = "block";
+  }
+  if (element.value === "") {
+    element.parentElement.lastElementChild.innerText =
+      "This field can not be empty";
+  }
+}
+
+/*
+  ON LOAD
+*/
 document.addEventListener("DOMContentLoaded", () => {
   userName.focus();
   otherJobRole.style.display = "none";
@@ -30,8 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
   bitcoinInfo.style.display = "none";
 });
 
-// Job Role extra input field for 'other' option
-
+/*
+  JOB INFO SECTION
+  Job Role extra input field will display if 'other' option is selected
+*/
 jobRoleSelect.addEventListener("change", (e) => {
   if (e.target.value === "other") {
     otherJobRole.style.display = "block";
@@ -40,17 +82,16 @@ jobRoleSelect.addEventListener("change", (e) => {
   }
 });
 
-// T-SHIRT INFO SECTION
-
+/*
+  T-SHIRT INFO SECTION
+  Shows the color options available for the selected design
+*/
 designSelect.addEventListener("change", (e) => {
-  const heartJsOptions = colorSelect.querySelectorAll(
-    '[data-theme="heart js"]'
-  );
+  const heartJsOptions = colorSelect.querySelectorAll('[data-theme="heart js"]');
   const jsPunsOptions = colorSelect.querySelectorAll('[data-theme="js puns"]');
 
   colorSelect.disabled = false;
 
-  // only shows the color options available for the selected design
   if (e.target.value === "js puns") {
     colorSelect[0].selected = "true";
     for (let i = 0; i < heartJsOptions.length; i++) {
@@ -70,7 +111,12 @@ designSelect.addEventListener("change", (e) => {
   }
 });
 
-// ACTIVITIES SECTION
+/*
+  ACTIVITIES SECTION
+  Update total price according to selected activities;
+  Disable options that conflict with time and day of activitie selected;
+  Validates and display error message if no option is selected.
+*/
 let totalPrice = 0;
 
 activitiesSet.addEventListener("change", (event) => {
@@ -105,6 +151,7 @@ activitiesSet.addEventListener("change", (event) => {
   validation(activitiesBox, isActivitiesValid());
 });
 
+// Add or remove classes for better visibility of focused option
 checkboxInputs.forEach((element) => {
   element.addEventListener("blur", () => {
     element.parentElement.classList.add("blur");
@@ -116,10 +163,11 @@ checkboxInputs.forEach((element) => {
   });
 });
 
-// PAYMENT INFO SECTION
-
+/*
+  PAYMENT INFO SECTION
+  Displays input fields according to payment option selected
+*/
 paymentType.addEventListener("change", (e) => {
-  // it displays the correspondent inputs, according to what was selected on payment type input
   if (paymentType.querySelector('[value="credit-card"]').selected) {
     creditCardinfo.style.display = "block";
     paypalInfo.style.display = "none";
@@ -135,39 +183,9 @@ paymentType.addEventListener("change", (e) => {
   }
 });
 
-// FORM SUBMIT/VALIDATION
-
-// test if user's inputs are valid
-const isNameValid = () => /^(?!\s*$).+/.test(userName.value);
-const isEmailValid = () => /^[^@]+@[^@.]+\.[a-z]+$/i.test(userEmail.value);
-const isCardValid = () => /\b\d{13,16}\b/.test(ccNum.value);
-const isZipCodeValid = () => /^\d{5}$/.test(zipCode.value);
-const isCvvValid = () => /^\d{3}$/.test(cvv.value);
-function isActivitiesValid() {
-  if (totalPrice !== 0) {
-    return true;
-  }
-};
-
 /*
-  if input is valid submits and add visual hints that it was valid,
-  if not, it prevents form submission and add visual hints to show where to fix/add info
+  VALIDATION OF REQUIRED FIELDS ON CHANGE
 */
-function validation(element, validator) {
-  if (validator) {
-    element.parentElement.classList.add("valid");
-    element.parentElement.classList.remove("not-valid");
-    element.parentElement.lastElementChild.style.display = "none";
-  } else if (!validator) {
-    element.parentElement.classList.remove("valid");
-    element.parentElement.classList.add("not-valid");
-    element.parentElement.lastElementChild.style.display = "block";
-  }
-  if (element.value === "") {
-    element.parentElement.lastElementChild.innerText = "This field can not be empty";
-  }
-}
-
 userName.addEventListener("keyup", () => {
   validation(userName, isNameValid());
 });
@@ -177,7 +195,8 @@ userEmail.addEventListener("keyup", () => {
   validation(userEmail, isValid);
 
   if (!isValid && userEmail.value !== "") {
-    userEmail.parentElement.lastElementChild.innerText = "Email address must be formatted correctly";
+    userEmail.parentElement.lastElementChild.innerText =
+      "Email address must be formatted correctly";
   }
 });
 
@@ -186,7 +205,8 @@ ccNum.addEventListener("keyup", () => {
   validation(ccNum, isValid);
 
   if (!isValid && ccNum.value !== "") {
-    ccNum.parentElement.lastElementChild.innerText = "Credit card number must be between 13 - 16 digits";
+    ccNum.parentElement.lastElementChild.innerText =
+      "Credit card number must be between 13 - 16 digits";
   }
 });
 
@@ -195,7 +215,8 @@ zipCode.addEventListener("keyup", () => {
   validation(zipCode, isValid);
 
   if (!isValid && zipCode.value !== "") {
-    zipCode.parentElement.lastElementChild.innerText = "Zip Code must be 5 digits";
+    zipCode.parentElement.lastElementChild.innerText =
+      "Zip Code must be 5 digits";
   }
 });
 
@@ -208,8 +229,9 @@ cvv.addEventListener("keyup", () => {
   }
 });
 
-
-
+/*
+  FORM SUBMIT/VALIDATION
+*/
 form.addEventListener("submit", (e) => {
   validation(userName, isNameValid());
   validation(userEmail, isEmailValid());
