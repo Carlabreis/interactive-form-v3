@@ -17,6 +17,45 @@ Using the supplied HTML and CSS files, I added JavaScript to make the form more 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- 
+Form fields that have real time validation and conditional error messages are detailed in the project’s README.me file.
+I would highly recommend being a little more specific here. List exactly which fields are real time and what the conditional errors are. Here’s an example using one field for what I would expect for all fields!
+- EMAIL ADDRESS FIELD
+  - Real Time Validation
+  - empty field: “This field cannot be empty”
+  - incorrectly formatted: “Email address must be formatted correctly”
+I would also recommend putting this information at the TOP of your README file to make sure that your reviewer sees it!
+-->
+
+<!-- FEATURES -->
+
+## Features
+
+### real-time error messages and conditional error messages
+
+With the real time feature we get instant validation and error messages for the required input fields (marked with the \* ) if the user enters invalid input.
+The conditional feature displays error messages with more information about what is wrong.
+- NAME FIELD
+  - Real Time Validation
+  - empty or blank field: “This field cannot be empty”
+- EMAIL ADDRESS FIELD
+  - Real Time Validation
+  - empty field: “This field cannot be empty”
+  - incorrectly formatted (Several characters for the username, preceded by "@", followed by another set of characters, ending with a "." and a couple more characters for the domain name): “Email address must be formatted correctly”
+- REGISTER FOR ACTIVITIES SECTION
+  - Real Time Validation
+  - empty section: “Choose at least one activity”
+- CREDIT CARD SECTION (ONLY IF CREDIT CARD IS THE SELECTED PAYMENT METHOD)
+  - Real Time Validation
+  - "card number" is invalid: "Credit card number must be between 13 - 16 digits"
+  - "card number" empty field: “This field cannot be empty”
+  - "zip code" is invalid: "Zip Code must be 5 digits"
+  - "zip code" empty field: “This field cannot be empty”
+  - "cvv" is invalid: "CVV must be 3 digits"
+  - "cvv" empty field: “This field cannot be empty”
+Meeting all the requirements, the error will disapear and the green symbol will display to indicate it is a valid input.
+
+
 <!-- BUILT WITH -->
 
 ### Built With
@@ -53,17 +92,3 @@ HTML, CSS and JavaScript
     - [x] detail this specific feature in README.md file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- FEATURES -->
-
-## Features
-
-### real-time error messages
-
-With this feature we get instant validation and error message for the requires input fields (marked with the \* ) if the user enters invalid input.
-For example, if they enter the credit card number and type one extra number, they will get an error message right away. And by the deletion of the extra number the error will disapear and the green symbol will show instead to indicate it is a valid input.
-
-### conditional error messages
-
-This feature displays error messages with more information about what is wrong.
-For example, if the email address field is empty, inform the user that they should add an email address. But if they’ve already added an email address, but formatted it incorrectly, that message inform the user that the email format is invalid.
