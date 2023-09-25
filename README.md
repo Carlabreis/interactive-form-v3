@@ -1,32 +1,5 @@
 # interactive-form-v3
 
-<!-- ABOUT THE PROJECT -->
-
-## About The Project
-
-![Product screenshot](<Screenshot 2023-09-22 at 1.39.50 PM.png>)
-
-This project is part of the curriculum for Treehouse's Full Stack JavaScript Techdegree.
-
-In this project I used JavaScript to enhance an interactive regfistration form for a fictional Full Stack conference.
-
-Using the supplied HTML and CSS files, I added JavaScript to make the form more user-friendly by:
-
-- Adding customized and conditional behavior and interactivity;
-- Validating user input and providing helpful error messages when the user enters invalid information into the form fields.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- 
-Form fields that have real time validation and conditional error messages are detailed in the project’s README.me file.
-I would highly recommend being a little more specific here. List exactly which fields are real time and what the conditional errors are. Here’s an example using one field for what I would expect for all fields!
-- EMAIL ADDRESS FIELD
-  - Real Time Validation
-  - empty field: “This field cannot be empty”
-  - incorrectly formatted: “Email address must be formatted correctly”
-I would also recommend putting this information at the TOP of your README file to make sure that your reviewer sees it!
--->
-
 <!-- FEATURES -->
 
 ## Features
@@ -55,6 +28,22 @@ The conditional feature displays error messages with more information about what
   - "cvv" empty field: “This field cannot be empty”
 Meeting all the requirements, the error will disapear and the green symbol will display to indicate it is a valid input.
 
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+![Product screenshot](<Screenshot 2023-09-22 at 1.39.50 PM.png>)
+
+This project is part of the curriculum for Treehouse's Full Stack JavaScript Techdegree.
+
+In this project I used JavaScript to enhance an interactive regfistration form for a fictional Full Stack conference.
+
+Using the supplied HTML and CSS files, I added JavaScript to make the form more user-friendly by:
+
+- Adding customized and conditional behavior and interactivity;
+- Validating user input and providing helpful error messages when the user enters invalid information into the form fields.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- BUILT WITH -->
 
