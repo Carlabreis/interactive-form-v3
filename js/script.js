@@ -87,7 +87,9 @@ jobRoleSelect.addEventListener("change", (e) => {
   Shows the color options available for the selected design
 */
 designSelect.addEventListener("change", (e) => {
-  const heartJsOptions = colorSelect.querySelectorAll('[data-theme="heart js"]');
+  const heartJsOptions = colorSelect.querySelectorAll(
+    '[data-theme="heart js"]'
+  );
   const jsPunsOptions = colorSelect.querySelectorAll('[data-theme="js puns"]');
 
   colorSelect.disabled = false;
@@ -233,6 +235,7 @@ cvv.addEventListener("keyup", () => {
   FORM SUBMIT/VALIDATION
 */
 form.addEventListener("submit", (e) => {
+  // first validate all required fields
   validation(userName, isNameValid());
   validation(userEmail, isEmailValid());
   validation(activitiesBox, isActivitiesValid());
@@ -241,5 +244,27 @@ form.addEventListener("submit", (e) => {
     validation(zipCode, isZipCodeValid());
     validation(cvv, isCvvValid());
   }
-  e.preventDefault();
+
+  //then if all required fields are valid, submits form
+  if (
+    userName.parentElement.classList.contains("valid") &&
+    userEmail.parentElement.classList.contains("valid") &&
+    activitiesBox.parentElement.classList.contains("valid")
+  ) {
+    if (paymentType.value === "credit-card") {
+      if (
+        ccNum.parentElement.classList.contains("valid") &&
+        zipCode.parentElement.classList.contains("valid") &&
+        cvv.parentElement.classList.contains("valid")
+      ) {
+        true;
+      } else {
+        e.preventDefault();
+      }
+    } else {
+      true;
+    }
+  } else {
+    e.preventDefault();
+  }
 });
